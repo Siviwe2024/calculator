@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    /* Add CSS to style the calculator layout */
+    .calculator {
+      width: 250px;
+      margin: auto;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .screen {
+      margin-bottom: 10px;
+    }
+    .buttons button {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="screen">
+      <input type="text" id="result" value="0">
+    </div>
+    <div class="buttons">
+      <button onclick="numberPressed('1')">1</button>
+      <button onclick="numberPressed('2')">2</button>
+      <button onclick="numberPressed('3')">3</button>
+      <button onclick="operatorPressed('+')">+</button>
+      <button onclick="numberPressed('4')">4</button>
+      <button onclick="numberPressed('5')">5</button>
+      <button onclick="numberPressed('6')">6</button>
+      <button onclick="operatorPressed('-')">-</button>
+      <button onclick="numberPressed('7')">7</button>
+      <button onclick="numberPressed('8')">8</button>
+      <button onclick="numberPressed('9')">9</button>
+      <button onclick="operatorPressed('*')">×</button>
+      <button onclick="numberPressed('0')">0</button>
+      <button onclick="operatorPressed('/')">÷</button>
+      <button onclick="clearPressed()">C</button>
+      <button onclick="equalPressed()">=</button>
+    </div>
+  </div>
+
+  <script>
+    
+    let oldValue, newValue, result;
+    let operator = null;
+    const input = document.getElementById("result");
+
+    function clearPressed() {
+      input.value = "0";
+      operator = null;
+    }
+
+    function numberPressed(number) {
+      if (input.value === "0") {
+        input.value = number;
+      } else {
+        input.value += number;
+      }
+    }
+
+    function operatorPressed(op) {
+      oldValue = input.value;
+      operator = op;
+      input.value = "0";
+    }
+
+    function equalPressed() {
+      newValue = input.value;
+      if (operator === "+") {
+        result = parseInt(oldValue) + parseInt(newValue);
+      } else if (operator === "-") {
+        result = parseInt(oldValue) - parseInt(newValue);
+      } else if (operator === "*") {
+        result = parseInt(oldValue) * parseInt(newValue);
+      } else if (operator === "/") {
+        result = parseInt(oldValue) / parseInt(newValue);
+      }
+      input.value = result;
+    }
+  </script>
+</body>
+</html>
